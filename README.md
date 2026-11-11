@@ -76,6 +76,24 @@ falha.
 - [ ] Nova conversão atualiza o resultado.
 - [ ] Resultado exibe taxa e data da API.
 
+## Capturas de tela
+
+### Tela inicial
+
+![Tela inicial](capturas/01-tela-inicial.png)
+
+### Seleção de moeda
+
+![Seleção de moeda](capturas/02-selecao-de-moeda.png)
+
+### Resultado da conversão
+
+![Resultado da conversão](capturas/03-resultado-da-conversao.png)
+
+### Validação de valor
+
+![Validação de valor](capturas/04-validacao-de-valor.png)
+
 ## Verificações de código
 
 ```bash
