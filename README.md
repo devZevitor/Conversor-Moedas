@@ -1,56 +1,86 @@
-# Welcome to your Expo app 👋
+# Conversor de Moedas
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile de conversão de moedas desenvolvido com React Native, Expo
+SDK 58 e arquitetura MVVM. As moedas e taxas são carregadas da
+[API pública Frankfurter](https://api.frankfurter.dev/).
 
-## Get started
+## Requisitos
 
-1. Install dependencies
+- Node.js compatível com Expo SDK 58
+- Android Studio/emulador, dispositivo físico ou navegador
+- npm
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Instalação e execução
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+No terminal do Expo, use `a` para Android, `i` para iOS ou `w` para web.
+Também é possível executar diretamente:
 
-### Other setup steps
+```bash
+npm run android
+npm run ios
+npm run web
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Como usar
 
-## Learn more
+1. Aguarde o carregamento da lista de moedas.
+2. Informe um valor positivo, usando ponto ou vírgula nos centavos.
+3. Escolha as moedas de origem e destino.
+4. Pressione **Converter**.
+5. Confira o valor convertido, a taxa usada e a data de referência.
 
-To learn more about developing your project with Expo, look at the following resources:
+A conversão usa a taxa retornada pela API no momento da consulta. A taxa é de
+referência e não representa necessariamente uma cotação comercial em tempo real.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Arquitetura
 
-## Join the community
+```text
+src/
+├── app/                    # Rotas do Expo Router
+├── models/                 # Comunicação e validação da resposta da API
+├── viewmodels/             # Estado, validações e coordenação do fluxo
+├── views/                  # Tela e componentes visuais do conversor
+├── utils/                  # Formatação para apresentação
+└── components/             # Componentes compartilhados
+```
 
-Join our community of developers creating universal apps.
+- **Model:** [modelo-moedas.ts](src/models/modelo-moedas.ts) consulta moedas
+  e taxas, tratando rede, HTTP e respostas inválidas.
+- **ViewModel:** [use-conversor-moedas.ts](src/viewmodels/use-conversor-moedas.ts)
+  controla estados, validações, carregamento e cálculo.
+- **View:** [TelaConversor.tsx](src/views/TelaConversor.tsx) apresenta os
+  campos, seletores, mensagens e resultado.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Validações e tratamento de erros
+
+O aplicativo bloqueia valores vazios, inválidos, zero, negativos e moedas
+iguais. Também impede consultas simultâneas, mostra carregamento, limpa
+resultados antigos ao alterar os campos e permite tentar novamente quando a API
+falha.
+
+## Checklist de testes manuais
+
+- [ ] Lista de moedas carregada ao abrir a tela.
+- [ ] Conversão válida entre duas moedas diferentes.
+- [ ] Campo vazio exibe orientação.
+- [ ] Zero e valores negativos são bloqueados.
+- [ ] Decimal com vírgula é interpretado corretamente.
+- [ ] Moedas iguais são bloqueadas.
+- [ ] Erro de rede/servidor exibe mensagem e permite nova tentativa.
+- [ ] Indicador aparece durante carregamento e conversão.
+- [ ] Nova conversão atualiza o resultado.
+- [ ] Resultado exibe taxa e data da API.
+
+## Verificações de código
+
+```bash
+npx tsc --noEmit
+npx expo lint
+```
+
+O lint pode solicitar a instalação/configuração do ESLint na primeira execução.
