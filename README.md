@@ -63,19 +63,6 @@ iguais. Também impede consultas simultâneas, mostra carregamento, limpa
 resultados antigos ao alterar os campos e permite tentar novamente quando a API
 falha.
 
-## Checklist de testes manuais
-
-- [ ] Lista de moedas carregada ao abrir a tela.
-- [ ] Conversão válida entre duas moedas diferentes.
-- [ ] Campo vazio exibe orientação.
-- [ ] Zero e valores negativos são bloqueados.
-- [ ] Decimal com vírgula é interpretado corretamente.
-- [ ] Moedas iguais são bloqueadas.
-- [ ] Erro de rede/servidor exibe mensagem e permite nova tentativa.
-- [ ] Indicador aparece durante carregamento e conversão.
-- [ ] Nova conversão atualiza o resultado.
-- [ ] Resultado exibe taxa e data da API.
-
 ## Capturas de tela
 
 ### Tela inicial
