@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
   },
   inputError: { borderColor: cores.erro },
   validation: { color: cores.erro, fontSize: 13, marginTop: 6 },
-  loadingRow: { flexDirection: 'row', alignItems: 'center', marginTop: 16 },
-  loadingText: { marginLeft: 10, color: cores.textoSuave },
+  loadingRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 16 },
+  loadingText: { color: cores.textoSuave },
   swap: {
     alignSelf: 'center',
     minHeight: 44,
